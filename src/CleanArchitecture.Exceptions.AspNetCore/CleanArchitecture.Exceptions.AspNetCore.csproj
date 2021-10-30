@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+
+        <Authors>Billy Mumby</Authors>
+        <Copyright>Copyright 2021 (c) Billy Mumby. All rights reserved.</Copyright>
+
+        <Description>A set of exceptions to be used in projects looking to follow clean architecture.</Description>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+        <!-- NuGet settings -->
+        <PackageId>Mumby0168.CleanArchitecture.Exceptions.AspNetCore</PackageId>
+        <PackageTags>Clean;CleanArchitecture;Architecture;Exceptions;DDD;Domain;Design;DotNet;AspNetCore;Middleware</PackageTags>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/mumby0168/CleanArchitecture.Exceptions.AspNetCore</PackageProjectUrl>
+        <PackageIcon>icon.png</PackageIcon>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/mumby0168/CleanArchitecture.Exceptions.AspNetCore</RepositoryUrl>
+
+        <!-- SourceLink settings -->
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Include="icon.png" Pack="true" PackagePath="\" />
+    </ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="CleanArchitecture.Exceptions" Version="1.0.0-pre1" />
+      <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.20" />
+      <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.20" />
+      <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.20" />
+      <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    </ItemGroup>
+
+</Project>

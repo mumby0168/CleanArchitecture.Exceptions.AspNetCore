@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8A6206E2-CF13-4DAD-BCDC-B706EDAB40BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitecture.Exceptions.AspNetCore", "src\CleanArchitecture.Exceptions.AspNetCore\CleanArchitecture.Exceptions.AspNetCore.csproj", "{78A5B9DB-7D38-4EC2-A684-501661B8FB3D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{FB2686EB-BACB-411E-B8D4-B1F7120C6D3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitecture.Exceptions.AspNetCore.Tests", "tests\CleanArchitecture.Exceptions.AspNetCore.Tests\CleanArchitecture.Exceptions.AspNetCore.Tests.csproj", "{F90BFF65-7CD6-449F-B758-3543758AAD9E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{64258CE0-8D6B-44BF-A9CE-41D5959827C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalApisWeb", "samples\MinimalApisWeb\MinimalApisWeb.csproj", "{D1231ADF-6032-4065-B22E-C64352142F06}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{78A5B9DB-7D38-4EC2-A684-501661B8FB3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78A5B9DB-7D38-4EC2-A684-501661B8FB3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78A5B9DB-7D38-4EC2-A684-501661B8FB3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78A5B9DB-7D38-4EC2-A684-501661B8FB3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F90BFF65-7CD6-449F-B758-3543758AAD9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F90BFF65-7CD6-449F-B758-3543758AAD9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F90BFF65-7CD6-449F-B758-3543758AAD9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F90BFF65-7CD6-449F-B758-3543758AAD9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1231ADF-6032-4065-B22E-C64352142F06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1231ADF-6032-4065-B22E-C64352142F06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1231ADF-6032-4065-B22E-C64352142F06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1231ADF-6032-4065-B22E-C64352142F06}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{78A5B9DB-7D38-4EC2-A684-501661B8FB3D} = {8A6206E2-CF13-4DAD-BCDC-B706EDAB40BA}
+		{F90BFF65-7CD6-449F-B758-3543758AAD9E} = {FB2686EB-BACB-411E-B8D4-B1F7120C6D3A}
+		{D1231ADF-6032-4065-B22E-C64352142F06} = {64258CE0-8D6B-44BF-A9CE-41D5959827C3}
+	EndGlobalSection
+EndGlobal
