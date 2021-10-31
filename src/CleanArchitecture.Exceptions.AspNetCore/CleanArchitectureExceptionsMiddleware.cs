@@ -25,7 +25,7 @@ public class CleanArchitectureExceptionsMiddleware : IMiddleware
         {
             await next(context);
         }
-        catch (ResourceNotFoundException exception)
+        catch (BaseCleanArchitectureException exception) when (exception.GetType().Name.StartsWith(nameof(ResourceNotFoundException)))
         {
             _logger.LogInformation(
                 "Handling resource not found exception with message {ResourceNotFoundExceptionMessage} and code {ResourceNotFoundExceptionCode}",
@@ -33,7 +33,7 @@ public class CleanArchitectureExceptionsMiddleware : IMiddleware
             context.Response.StatusCode = (int) HttpStatusCode.NotFound;
             await context.Response.WriteAsync(BuildErrorResponse(exception));
         }
-        catch (ResourceExistsException exception)
+        catch (BaseCleanArchitectureException exception) when (exception.GetType().Name.StartsWith(nameof(ResourceExistsException)))
         {
             _logger.LogInformation(
                 "Handling resource exists exception with message {ResourceExistsExceptionMessage} and code {ResourceExistsExceptionCode}",
@@ -41,7 +41,7 @@ public class CleanArchitectureExceptionsMiddleware : IMiddleware
             context.Response.StatusCode = (int) HttpStatusCode.Conflict;
             await context.Response.WriteAsync(BuildErrorResponse(exception));
         }
-        catch (DomainException exception)
+        catch (BaseCleanArchitectureException exception) when (exception.GetType().Name.StartsWith(nameof(DomainException)))
         {
             _logger.LogInformation(
                 "Handling domain exception with message {DomainExceptionMessage} and code {DomainExceptionCode}",
@@ -52,6 +52,7 @@ public class CleanArchitectureExceptionsMiddleware : IMiddleware
         catch (BaseCleanArchitectureException exception)
         {
             var exceptionType = exception.GetType();
+
             if (_options.CurrentValue.CustomExceptionMappings.ContainsKey(exceptionType))
             {
                 _logger.LogInformation(
