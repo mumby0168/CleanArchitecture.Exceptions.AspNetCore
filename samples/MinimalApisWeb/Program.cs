@@ -15,6 +15,7 @@ builder.Services.AddCleanArchitectureExceptionsHandler(options =>
 {
     options.ApplicationName = "MinimalApisWeb";
     options.ConfigureCustomException<ForbiddenException>(HttpStatusCode.Forbidden);
+    options.ConfigureComplexValidationException();
 });
 
 var app = builder.Build();
@@ -43,7 +44,8 @@ app.MapPost("/customers", async (Customer customer, CustomersDbContext database)
 
     if (existingCustomer is not null)
     {
-        throw new ResourceExistsException<Customer>($"A customer with the email address {customer.EmailAddress} already exists");
+        throw new ResourceExistsException<Customer>(
+            $"A customer with the email address {customer.EmailAddress} already exists");
     }
 
     database.Customers.Add(customer);
@@ -54,4 +56,16 @@ app.MapPost("/customers", async (Customer customer, CustomersDbContext database)
 
 app.MapGet("/forbidden", _ => throw new ForbiddenException("This is a custom exception"));
 
+app.MapGet("/complex", _ => throw new ComplexValidationException("This is wrong", "So is this", "And this"));
+
 app.Run();
+
+public static class CustomExceptionRegistrationExtensions
+{
+    public static CleanArchitectureExceptionsOptions ConfigureComplexValidationException(
+        this CleanArchitectureExceptionsOptions options) =>
+        options.ConfigureCustomException<ComplexValidationException>(HttpStatusCode.BadRequest, exception => 
+            exception.As<ComplexValidationException>()
+                .Errors
+                .Select(x => new ErrorDto(x, "custom_validation_exception")));
+}

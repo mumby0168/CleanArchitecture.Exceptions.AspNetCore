@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using CleanArchitecture.Exceptions.AspNetCore.Tests.Stubs;
@@ -5,6 +8,7 @@ using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using Moq.AutoMock;
+using Newtonsoft.Json;
 using Xunit;
 
 namespace CleanArchitecture.Exceptions.AspNetCore.Tests;
@@ -12,6 +16,7 @@ namespace CleanArchitecture.Exceptions.AspNetCore.Tests;
 public class CleanArchitectureExceptionsMiddlewareTests
 {
     private AutoMocker _mocker = new();
+
     private CleanArchitectureExceptionsOptions _options = new()
     {
         ApplicationName = "TestApp"
@@ -41,7 +46,7 @@ public class CleanArchitectureExceptionsMiddlewareTests
         //Assert
         context.Response.StatusCode.Should().Be(404);
     }
-    
+
     [Fact]
     public async Task InvokeAsync_ResourceExistsException_MapsTo409ResponseCorrectly()
     {
@@ -58,7 +63,7 @@ public class CleanArchitectureExceptionsMiddlewareTests
         //Assert
         context.Response.StatusCode.Should().Be(409);
     }
-    
+
     [Fact]
     public async Task InvokeAsync_DomainException_MapsTo400ResponseCorrectly()
     {
@@ -75,7 +80,7 @@ public class CleanArchitectureExceptionsMiddlewareTests
         //Assert
         context.Response.StatusCode.Should().Be(400);
     }
-    
+
     [Fact]
     public async Task InvokeAsync_CustomException_MapsTo403ResponseCorrectly()
     {

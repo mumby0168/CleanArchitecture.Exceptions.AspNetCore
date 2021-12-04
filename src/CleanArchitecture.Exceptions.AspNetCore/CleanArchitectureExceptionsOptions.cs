@@ -4,21 +4,26 @@ namespace CleanArchitecture.Exceptions.AspNetCore;
 
 public class CleanArchitectureExceptionsOptions
 {
-    private readonly Dictionary<Type, HttpStatusCode> _customExceptionMappings;
+    private readonly Dictionary<Type, CustomExceptionPolicy> _customExceptionMappings;
     
     public CleanArchitectureExceptionsOptions()
     {
-        _customExceptionMappings = new Dictionary<Type, HttpStatusCode>();
+        _customExceptionMappings = new Dictionary<Type, CustomExceptionPolicy>();
     }
     
     public string? ApplicationName { get; set; }
 
-    public IReadOnlyDictionary<Type, HttpStatusCode> CustomExceptionMappings => _customExceptionMappings;
+    internal IReadOnlyDictionary<Type, CustomExceptionPolicy> CustomExceptionMappings => _customExceptionMappings;
 
-    public CleanArchitectureExceptionsOptions ConfigureCustomException<TException>(HttpStatusCode statusCode)
+    public CleanArchitectureExceptionsOptions ConfigureCustomException<TException>(HttpStatusCode statusCode, Func<BaseCleanArchitectureException, IEnumerable<ErrorDto>>? responseBuilder = null)
         where TException : BaseCleanArchitectureException
     {
-        _customExceptionMappings.Add(typeof(TException), statusCode);
+        _customExceptionMappings.Add(typeof(TException), new CustomExceptionPolicy()
+        {
+            StatusCode = statusCode,
+            HandleException = responseBuilder
+        });
+        
         return this;
     }
 }

@@ -26,4 +26,7 @@ public static class Extensions
 
     public static IApplicationBuilder UseCleanArchitectureExceptionsHandler(this IApplicationBuilder app) =>
         app.UseMiddleware<CleanArchitectureExceptionsMiddleware>();
+
+    public static T As<T>(this BaseCleanArchitectureException exception) where T : BaseCleanArchitectureException => 
+        (T) exception;
 }

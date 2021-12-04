@@ -58,10 +58,29 @@ public class CleanArchitectureExceptionsMiddleware : IMiddleware
                 _logger.LogInformation(
                     "Handling custom exception derived from BaseCleanArchitectureException type custom type {CustomExceptionTypeName}",
                     exceptionType.Name);
-                context.Response.StatusCode = (int) _options.CurrentValue.CustomExceptionMappings[exceptionType];
+
+                var policy = _options.CurrentValue.CustomExceptionMappings[exceptionType];
+
+                context.Response.StatusCode = (int) policy.StatusCode;
+
+                if (policy.HandleException is not null)
+                {
+                    await context.Response.WriteAsync(BuildErrorResponse(policy.HandleException(exception)));
+                    return;
+                }
+                    
                 await context.Response.WriteAsync(BuildErrorResponse(exception));
             }
         }
+    }
+
+    private string BuildErrorResponse(IEnumerable<ErrorDto> errors)
+    {
+        var response = new ErrorResponse(errors, _options.CurrentValue.ApplicationName);
+        return JsonConvert.SerializeObject(response, new JsonSerializerSettings
+        {
+            ContractResolver = new CamelCasePropertyNamesContractResolver()
+        });
     }
 
     private string BuildErrorResponse(BaseCleanArchitectureException exception)
