@@ -27,7 +27,7 @@ public class CleanArchitectureExceptionsMiddleware : IMiddleware
         }
         catch (BaseCleanArchitectureException exception) when (exception.GetType().Name.StartsWith(nameof(ResourceNotFoundException)))
         {
-            _logger.LogInformation(
+            _logger.LogError(
                 "Handling resource not found exception with message {ResourceNotFoundExceptionMessage} and code {ResourceNotFoundExceptionCode}",
                 exception.Message, exception.Code);
             context.Response.StatusCode = (int) HttpStatusCode.NotFound;
@@ -35,7 +35,7 @@ public class CleanArchitectureExceptionsMiddleware : IMiddleware
         }
         catch (BaseCleanArchitectureException exception) when (exception.GetType().Name.StartsWith(nameof(ResourceExistsException)))
         {
-            _logger.LogInformation(
+            _logger.LogError(
                 "Handling resource exists exception with message {ResourceExistsExceptionMessage} and code {ResourceExistsExceptionCode}",
                 exception.Message, exception.Code);
             context.Response.StatusCode = (int) HttpStatusCode.Conflict;
@@ -43,7 +43,7 @@ public class CleanArchitectureExceptionsMiddleware : IMiddleware
         }
         catch (BaseCleanArchitectureException exception) when (exception.GetType().Name.StartsWith(nameof(DomainException)))
         {
-            _logger.LogInformation(
+            _logger.LogError(
                 "Handling domain exception with message {DomainExceptionMessage} and code {DomainExceptionCode}",
                 exception.Message, exception.Code);
             context.Response.StatusCode = (int) HttpStatusCode.BadRequest;
@@ -55,7 +55,7 @@ public class CleanArchitectureExceptionsMiddleware : IMiddleware
 
             if (_options.CurrentValue.CustomExceptionMappings.ContainsKey(exceptionType))
             {
-                _logger.LogInformation(
+                _logger.LogError(
                     "Handling custom exception derived from BaseCleanArchitectureException type custom type {CustomExceptionTypeName}",
                     exceptionType.Name);
 
